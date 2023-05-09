@@ -55,6 +55,14 @@ def handle_click(event):
     row = y // CELL_SIZE
     board[row][col] = 1 - board[row][col]
 
+def randomize_board():
+    global board
+    board = np.zeros((ROWS, COLS), dtype=int)
+    for row in range(ROWS):
+        for col in range(COLS):
+            if np.random.rand() < 0.4:
+                board[row][col] = 1
+
 def main():
     running = True  
     clock = pygame.time.Clock()
@@ -72,6 +80,8 @@ def main():
                     playing = ~playing
                 elif event.key == pygame.K_BACKSPACE:
                     reset_board()
+                elif event.key == pygame.K_r:
+                    randomize_board()
 
         if(playing):
             update_cells()
